@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Route Delivery Planner</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="static/index.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand brand-logo" href="#">
+        <span class="brand-icon"><i class="bi bi-box-seam-fill"></i></span>
+        <span class="brand-text">Smart Route <span class="accent">Delivery Planner</span></span>
+      </a>
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <i class="bi bi-list text-white fs-4"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMain">
+        <div class="d-flex gap-3 align-items-center py-2 py-lg-0">
+          <button class="btn btn-outline-custom" onclick="openModal('loginModal')">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Login
+          </button>
+          <button class="btn btn-primary-custom" onclick="openModal('signupModal')">
+            <i class="bi bi-person-plus me-2"></i>Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section" id="home">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+    <div class="container">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-6 hero-content">
+          <div class="badge-pill mb-4">
+            <span class="status-dot"></span>
+            AI-Powered Logistics Platform
+          </div>
+          <h1 class="hero-title">
+            Optimize Delivery Routes
+            <span class="gradient-text">with AI</span>
+          </h1>
+          <p class="hero-subtitle">
+            Reduce delivery times by up to 40%, cut fuel costs, and delight customers with smart, 
+            real-time route optimization powered by advanced algorithms — built for modern logistics teams.
+          </p>
+          <div class="hero-stats d-flex gap-4 mb-5">
+            <div class="stat-chip">
+              <span class="stat-num">40%</span>
+              <span class="stat-label">Faster Routes</span>
+            </div>
+            <div class="stat-chip">
+              <span class="stat-num">30%</span>
+              <span class="stat-label">Fuel Saved</span>
+            </div>
+            <div class="stat-chip">
+              <span class="stat-num">99%</span>
+              <span class="stat-label">Uptime</span>
+            </div>
+          </div>
+          <div class="d-flex gap-3 flex-wrap">
+            <button class="btn btn-primary-custom btn-lg-custom" onclick="openModal('signupModal')">
+              <i class="bi bi-rocket-takeoff me-2"></i>Get Started Free
+              <span class="btn-arrow">→</span>
+            </button>
+            <button class="btn btn-outline-custom btn-lg-custom" onclick="openModal('loginModal')">
+              <i class="bi bi-play-circle me-2"></i>Login to Dashboard
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-visual d-none d-lg-flex justify-content-center align-items-center">
+          <div class="map-mockup">
+            <div class="mockup-header">
+              <div class="mockup-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="mockup-title">Live Route Preview</span>
+            </div>
+            <div class="mockup-map">
+              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="route-svg">
+                <defs>
+                  <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#3b82f6"/>
+                    <stop offset="100%" style="stop-color:#22c55e"/>
+                  </linearGradient>
+                </defs>
+                <!-- Grid lines -->
+                <line x1="0" y1="60" x2="400" y2="60" stroke="#ffffff08" stroke-width="1"/>
+                <line x1="0" y1="120" x2="400" y2="120" stroke="#ffffff08" stroke-width="1"/>
+                <line x1="0" y1="180" x2="400" y2="180" stroke="#ffffff08" stroke-width="1"/>
+                <line x1="0" y1="240" x2="400" y2="240" stroke="#ffffff08" stroke-width="1"/>
+                <line x1="80" y1="0" x2="80" y2="300" stroke="#ffffff08" stroke-width="1"/>
+                <line x1="160" y1="0" x2="160" y2="300" stroke="#ffffff08" stroke-width="1"/>
+                <line x1="240" y1="0" x2="240" y2="300" stroke="#ffffff08" stroke-width="1"/>
+                <line x1="320" y1="0" x2="320" y2="300" stroke="#ffffff08" stroke-width="1"/>
+                <!-- Route path -->
+                <path d="M 40 40 Q 100 80 160 100 Q 220 120 260 160 Q 300 200 360 260" 
+                      fill="none" stroke="url(#routeGrad)" stroke-width="3" stroke-dasharray="8,4" class="route-path"/>
+                <!-- Nodes -->
+                <circle cx="40" cy="40" r="8" fill="#3b82f6" class="node-pulse"/>
+                <circle cx="40" cy="40" r="4" fill="white"/>
+                <circle cx="160" cy="100" r="7" fill="#f59e0b"/>
+                <circle cx="160" cy="100" r="3.5" fill="white"/>
+                <circle cx="260" cy="160" r="7" fill="#22c55e"/>
+                <circle cx="260" cy="160" r="3.5" fill="white"/>
+                <circle cx="360" cy="260" r="9" fill="#ef4444" class="node-pulse"/>
+                <circle cx="360" cy="260" r="4.5" fill="white"/>
+                <!-- Labels -->
+                <text x="55" y="35" fill="#94a3b8" font-size="10" font-family="Inter">Start</text>
+                <text x="175" y="95" fill="#94a3b8" font-size="10" font-family="Inter">Stop A</text>
+                <text x="275" y="155" fill="#94a3b8" font-size="10" font-family="Inter">Stop B</text>
+                <text x="330" y="255" fill="#94a3b8" font-size="10" font-family="Inter">End</text>
+                <!-- Speed indicator -->
+                <rect x="10" y="270" width="100" height="22" rx="11" fill="#3b82f620"/>
+                <text x="60" y="285" fill="#3b82f6" font-size="9" font-family="Inter" text-anchor="middle">▶ 12.4 km optimized</text>
+              </svg>
+              <div class="map-overlay-badge">
+                <i class="bi bi-shield-check text-success"></i>
+                <span>Route Optimized</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="badge-pill mb-3 mx-auto" style="width:fit-content">
+          <span class="status-dot green"></span>
+          Why Choose Us
+        </div>
+        <h2 class="section-title">Everything You Need for<br/><span class="gradient-text">Smart Deliveries</span></h2>
+        <p class="section-subtitle">Powerful features designed for modern delivery operations</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrap" style="background: #3b82f620">
+              <i class="bi bi-cpu feature-icon" style="color:#3b82f6"></i>
+            </div>
+            <h5 class="feature-title">AI Route Optimization</h5>
+            <p class="feature-desc">Dijkstra-powered algorithms calculate the shortest, fastest, and most fuel-efficient routes in real time.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrap" style="background: #22c55e20">
+              <i class="bi bi-map feature-icon" style="color:#22c55e"></i>
+            </div>
+            <h5 class="feature-title">Live Map Visualization</h5>
+            <p class="feature-desc">Interactive Leaflet maps with real Karachi coordinates, live markers, and animated route drawing.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrap" style="background: #f59e0b20">
+              <i class="bi bi-speedometer2 feature-icon" style="color:#f59e0b"></i>
+            </div>
+            <h5 class="feature-title">Traffic Intelligence</h5>
+            <p class="feature-desc">Smart traffic avoidance options let riders choose between speed, fuel efficiency, or road quality.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrap" style="background: #ef444420">
+              <i class="bi bi-graph-up-arrow feature-icon" style="color:#ef4444"></i>
+            </div>
+            <h5 class="feature-title">Delivery Analytics</h5>
+            <p class="feature-desc">Track distance, ETA, and cost summaries for every delivery run with a clean summary panel.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrap" style="background: #8b5cf620">
+              <i class="bi bi-phone feature-icon" style="color:#8b5cf6"></i>
+            </div>
+            <h5 class="feature-title">Mobile Responsive</h5>
+            <p class="feature-desc">Fully responsive dashboard that works flawlessly on phones, tablets, and desktop screens.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrap" style="background: #06b6d420">
+              <i class="bi bi-shield-lock feature-icon" style="color:#06b6d4"></i>
+            </div>
+            <h5 class="feature-title">Secure Authentication</h5>
+            <p class="feature-desc">Local-first authentication with encrypted user sessions. No backend required — privacy by design.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+        <p class="section-subtitle">Three simple steps to smarter deliveries</p>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-md-4">
+          <div class="step-card text-center">
+            <div class="step-num">01</div>
+            <div class="step-icon-wrap"><i class="bi bi-person-plus-fill"></i></div>
+            <h5>Create Account</h5>
+            <p>Sign up in seconds. No credit card needed. Just a username and password.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-card text-center">
+            <div class="step-num">02</div>
+            <div class="step-icon-wrap"><i class="bi bi-pin-map-fill"></i></div>
+            <h5>Select Locations</h5>
+            <p>Pick your start and end points from real Karachi landmarks on the interactive map.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="step-card text-center">
+            <div class="step-num">03</div>
+            <div class="step-icon-wrap"><i class="bi bi-lightning-charge-fill"></i></div>
+            <h5>Get Optimal Route</h5>
+            <p>AI calculates the best path and displays it with distance, time, and reasoning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="brand-logo mb-2">
+            <span class="brand-icon"><i class="bi bi-truck"></i></span>
+            <span class="brand-text">Smart Route <span class="accent">Delivery Planner</span></span>
+          </div>
+          <p class="footer-copy">© 2026 Smart Route Delivery Planner. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-end mt-3 mt-md-0">
+          <div class="d-flex gap-3 justify-content-md-end">
+            <button class="btn btn-primary-custom" onclick="openModal('signupModal')">
+              <i class="bi bi-rocket-takeoff me-2"></i>Start Free
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="loginModal" onclick="closeModalOutside(event,'loginModal')">
+    <div class="auth-modal" onclick="event.stopPropagation()">
+      <div class="modal-close" onclick="closeModal('loginModal')"><i class="bi bi-x-lg"></i></div>
+      <div class="modal-header-custom">
+        <div class="modal-brand"><i class="bi bi-truck"></i></div>
+        <h4>Welcome Back</h4>
+        <p>Login to your delivery dashboard</p>
+      </div>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group-custom">
+          <label><i class="bi bi-person me-2"></i>Username</label>
+          <input type="text" id="loginUsername" class="input-custom" placeholder="Enter your username" required/>
+        </div>
+        <div class="form-group-custom">
+          <label><i class="bi bi-lock me-2"></i>Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="loginPassword" class="input-custom" placeholder="Enter your password" required/>
+            <button type="button" class="eye-btn" onclick="togglePwd('loginPassword',this)">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="alert-custom" id="loginAlert"></div>
+        <button type="submit" class="btn btn-primary-custom w-100 btn-submit">
+          <span class="btn-text"><i class="bi bi-box-arrow-in-right me-2"></i>Login</span>
+          <span class="btn-loader d-none"><span class="spinner-border spinner-border-sm"></span></span>
+        </button>
+      </form>
+      <div class="modal-footer-custom">
+        <p>Don't have an account? <a href="#" onclick="switchModal('loginModal','signupModal')">Sign up free</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div class="modal-overlay" id="signupModal" onclick="closeModalOutside(event,'signupModal')">
+    <div class="auth-modal" onclick="event.stopPropagation()">
+      <div class="modal-close" onclick="closeModal('signupModal')"><i class="bi bi-x-lg"></i></div>
+      <div class="modal-header-custom">
+        <div class="modal-brand"><i class="bi bi-truck"></i></div>
+        <h4>Create Account</h4>
+        <p>Start optimizing your deliveries today</p>
+      </div>
+      <form id="signupForm" onsubmit="handleSignup(event)">
+        <div class="form-group-custom">
+          <label><i class="bi bi-person me-2"></i>Username</label>
+          <input type="text" id="signupUsername" class="input-custom" placeholder="Choose a username" minlength="3" required/>
+        </div>
+        <div class="form-group-custom">
+          <label><i class="bi bi-lock me-2"></i>Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="signupPassword" class="input-custom" placeholder="Choose a password (min 6 chars)" minlength="6" required/>
+            <button type="button" class="eye-btn" onclick="togglePwd('signupPassword',this)">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="form-group-custom">
+          <label><i class="bi bi-lock-fill me-2"></i>Confirm Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="signupConfirm" class="input-custom" placeholder="Re-enter your password" required/>
+            <button type="button" class="eye-btn" onclick="togglePwd('signupConfirm',this)">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="alert-custom" id="signupAlert"></div>
+        <button type="submit" class="btn btn-primary-custom w-100 btn-submit">
+          <span class="btn-text"><i class="bi bi-person-check me-2"></i>Create Account</span>
+          <span class="btn-loader d-none"><span class="spinner-border spinner-border-sm"></span></span>
+        </button>
+      </form>
+      <div class="modal-footer-custom">
+        <p>Already have an account? <a href="#" onclick="switchModal('signupModal','loginModal')">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="static/index.js"></script>
+</body>
+</html>
