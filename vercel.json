@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "AI Project/app.py",
+      "src": "app.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "AI Project/app.py"
+      "dest": "app.py"
     }
   ]
 }
